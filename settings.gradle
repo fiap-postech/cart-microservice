@@ -40,3 +40,6 @@ findProject(':drivers:customer-client')?.name = 'customer-client'
 
 include 'drivers:product-client'
 findProject(':drivers:product-client')?.name = 'product-client'
+
+include 'drivers:cart-producer'
+findProject(':drivers:cart-producer')?.name = 'cart-producer'
