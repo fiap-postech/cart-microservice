@@ -6,5 +6,5 @@ public interface CartWriterGateway {
 
     Cart write(Cart cart);
 
-    Cart close(Cart cart);
+    void close(Cart cart);
 }
