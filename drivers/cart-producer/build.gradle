@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    compileOnly sharedLibs.jakarta.validation.api
+    compileOnly sharedLibs.spring.context
+    compileOnly sharedLibs.spring.core
+
+    implementation project(":adapter")
+}
+
+configurations.implementation {
+    exclude group: 'org.testng ', module: 'testng'
+}
