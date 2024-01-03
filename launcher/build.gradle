@@ -12,9 +12,8 @@ dependencies {
     implementation sharedLibs.spring.boot.starter.actuator
     implementation sharedLibs.spring.boot.starter.validation
     implementation sharedLibs.spring.boot.starter.logging
-    implementation sharedLibs.spring.boot.starter.data.jpa
+    implementation sharedLibs.spring.boot.starter.data.redis
 
-    runtimeOnly sharedLibs.flyway.mysql
 
     implementation sharedLibs.springdoc.openapi.starter.webmvc.ui
 
@@ -34,6 +33,7 @@ dependencies {
     implementation project(":drivers:redis")
     implementation project(":drivers:customer-client")
     implementation project(":drivers:product-client")
+    implementation project(":drivers:cart-producer")
 }
 
 java {
