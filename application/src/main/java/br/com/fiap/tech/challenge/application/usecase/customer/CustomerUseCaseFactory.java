@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomerUseCaseFactory {
 
-    public static FindCustomerByDocumentUseCase findCustomerByDocumentService(CustomerReaderGateway reader) {
-        return new FindCustomerByDocumentUseCaseImpl(reader);
+    public static FindCustomerByUUIDUseCase findCustomerByUUIDUseCase(CustomerReaderGateway reader) {
+        return new FindCustomerByUUIDUseCaseImpl(reader);
     }
 
 }

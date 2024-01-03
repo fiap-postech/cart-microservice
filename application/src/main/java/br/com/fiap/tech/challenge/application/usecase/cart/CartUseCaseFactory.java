@@ -2,7 +2,7 @@ package br.com.fiap.tech.challenge.application.usecase.cart;
 
 import br.com.fiap.tech.challenge.application.gateway.CartReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CartWriterGateway;
-import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByDocumentUseCase;
+import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.product.FindProductByUUIDUseCase;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ public class CartUseCaseFactory {
         return new FindCartByUUIDUseCaseImpl(reader);
     }
 
-    public static CreateCartUseCase createCartService(FindCustomerByDocumentUseCase useCase, CartWriterGateway writer) {
+    public static CreateCartUseCase createCartService(FindCustomerByUUIDUseCase useCase, CartWriterGateway writer) {
         return new CreateCartUseCaseImpl(useCase, writer);
     }
 

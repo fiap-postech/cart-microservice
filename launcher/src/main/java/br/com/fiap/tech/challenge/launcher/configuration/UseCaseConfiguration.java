@@ -11,7 +11,7 @@ import br.com.fiap.tech.challenge.application.usecase.cart.FindCartByUUIDUseCase
 import br.com.fiap.tech.challenge.application.usecase.cart.RemoveCartItemUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.UpdateCartItemUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.CustomerUseCaseFactory;
-import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByDocumentUseCase;
+import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.product.FindProductByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.product.ProductUseCaseFactory;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +25,8 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public FindCustomerByDocumentUseCase findCustomerByDocumentService(CustomerReaderGateway reader) {
-        return CustomerUseCaseFactory.findCustomerByDocumentService(reader);
+    public FindCustomerByUUIDUseCase findCustomerByUUIDUseCase(CustomerReaderGateway reader) {
+        return CustomerUseCaseFactory.findCustomerByUUIDUseCase(reader);
     }
 
     @Bean
@@ -35,7 +35,7 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public CreateCartUseCase createCartService(FindCustomerByDocumentUseCase useCase, CartWriterGateway writer) {
+    public CreateCartUseCase createCartService(FindCustomerByUUIDUseCase useCase, CartWriterGateway writer) {
         return CartUseCaseFactory.createCartService(useCase, writer);
     }
 
