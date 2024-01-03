@@ -1,0 +1,10 @@
+db:
+  host: mysql
+  schema: tech_challenge
+  username: sys_tech_challenge
+  password: 6#233zJMNTjkQb#sgps#
+  port: 3306
+
+spring.data.redis:
+  host: redis
+  port: 6379

@@ -1,0 +1,11 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    compileOnly sharedLibs.spring.boot.starter.data.redis
+
+    compileOnly project(":adapter")
+}

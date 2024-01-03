@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    compileOnly sharedLibs.spring.boot.starter.web
+    compileOnly sharedLibs.spring.data.commons
+    compileOnly sharedLibs.springdoc.openapi.starter.webmvc.ui
+
+    compileOnly project(":adapter")
+
+    api 'io.rest-assured:rest-assured:5.4.0'
+    api 'io.rest-assured:json-schema-validator:5.4.0'
+    api 'org.instancio:instancio-junit:3.6.0'
+    api 'org.instancio:instancio-core:3.6.0'
+
+    testImplementation project(":adapter")
+
+    testImplementation sharedLibs.spring.boot.starter.test
+    testImplementation sharedLibs.spring.boot.starter.validation
+    testImplementation sharedLibs.spring.boot.starter.web
+    testImplementation sharedLibs.spring.data.commons
+    testImplementation sharedLibs.springdoc.openapi.starter.webmvc.ui
+
+    testImplementation("org.instancio:instancio-junit:3.6.0")
+    testImplementation("org.instancio:instancio-core:3.6.0")
+
+    api libs.rest.common
+}

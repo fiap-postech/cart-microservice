@@ -1,0 +1,7 @@
+[versions]
+domainCommonVersion = "1.0.3"
+restCommonVersion = "1.0.0"
+
+[libraries]
+domain-common = { module = "br.com.fiap.tech.challenge:domain-common", version.ref = "domainCommonVersion" }
+rest-common = { module = "br.com.fiap.tech.challenge:rest-common", version.ref = "restCommonVersion" }

@@ -1,0 +1,29 @@
+spring:
+  profiles.active: local
+  application.name: '${project.name}'
+  output.ansi.enabled: always
+  main.banner-mode: log
+  data:
+    redis:
+      host: localhost
+      port: 6380
+      time-to-live: 3600000
+
+server.port: 8080
+
+feign.okhttp.enabled: true
+
+management:
+  endpoints:
+    web:
+      base-path: /monitor
+      exposure.include: health,info,metrics
+  endpoint.health.show-details: always
+  info:
+    build.enabled: true
+    env.enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /doc
+    url: /v3/api-docs.yaml

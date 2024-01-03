@@ -1,0 +1,24 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    compileOnly sharedLibs.jakarta.validation.api
+    compileOnly sharedLibs.spring.core
+    compileOnly sharedLibs.spring.context
+
+    implementation sharedLibs.spring.cloud.starter.openfeign
+    implementation sharedLibs.spring.boot.starter.json
+
+    implementation libs.rest.common
+
+    api project(":application")
+
+    implementation project(":adapter")
+}
+
+configurations.implementation {
+    exclude group: 'org.testng ', module: 'testng'
+}

@@ -1,0 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    compileOnly sharedLibs.jakarta.validation.api
+
+    api project(":application")
+}
+
+configurations.implementation {
+    exclude group: 'org.testng ', module: 'testng'
+}

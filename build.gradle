@@ -1,0 +1,53 @@
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+
+allprojects {
+    apply plugin: "java"
+
+    sourceCompatibility = '17'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+            url = uri("https://maven.pkg.github.com/fiap-postech/domain-common")
+            credentials {
+                username = System.getProperty("gprUser") ?: System.getenv("GITHUB_ACTOR")
+                password = System.getProperty("gprKey") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+
+        maven {
+            url = uri("https://maven.pkg.github.com/fiap-postech/rest-common")
+            credentials {
+                username = System.getProperty("gprUser") ?: System.getenv("GITHUB_ACTOR")
+                password = System.getProperty("gprKey") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
+    dependencies {
+        testImplementation sharedLibs.junit.jupiter.api
+        testImplementation sharedLibs.lombok
+        testRuntimeOnly sharedLibs.junit.jupiter.engine
+
+        implementation sharedLibs.commons.lang3
+
+        compileOnly sharedLibs.lombok
+        annotationProcessor sharedLibs.lombok
+
+        implementation sharedLibs.mapstruct
+        annotationProcessor sharedLibs.mapstruct.processor
+        annotationProcessor sharedLibs.lombok.mapstruct.binding
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}

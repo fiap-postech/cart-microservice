@@ -1,0 +1,42 @@
+dependencyResolutionManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+            url = uri("https://maven.pkg.github.com/fiap-postech/gradle-version-catalog")
+            credentials {
+                username = System.getProperty("gprUser") ?: System.getenv("GITHUB_ACTOR")
+                password = System.getProperty("gprKey") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
+    versionCatalogs {
+        create("sharedLibs") {
+            from("br.com.fiap.tech.challenge:gradle-version-catalog:1.0.5")
+        }
+    }
+}
+
+rootProject.name = 'cart-microservice'
+
+include 'application'
+
+include 'adapter'
+
+include 'enterprise'
+
+include 'launcher'
+
+include 'drivers:redis'
+findProject(':drivers:redis')?.name = 'redis'
+
+include 'drivers:rest'
+findProject(':drivers:rest')?.name = 'rest'
+
+include 'drivers:customer-client'
+findProject(':drivers:customer-client')?.name = 'customer-client'
+
+include 'drivers:product-client'
+findProject(':drivers:product-client')?.name = 'product-client'
