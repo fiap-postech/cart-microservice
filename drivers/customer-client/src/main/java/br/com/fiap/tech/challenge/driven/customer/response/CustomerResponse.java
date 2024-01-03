@@ -17,4 +17,6 @@ public class CustomerResponse extends Response {
     private String email;
 
     private String document;
+
+    private boolean enabled;
 }

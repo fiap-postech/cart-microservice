@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
 @Mapper(componentModel = SPRING)
-public interface CustomerResponseMapper {
+public interface CustomerClientResponseMapper {
 
     CustomerDTO toDTO(CustomerResponse dto);
 }

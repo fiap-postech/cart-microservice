@@ -3,8 +3,7 @@ package br.com.fiap.tech.challenge.driven.customer.service;
 import br.com.fiap.tech.challenge.adapter.dto.CustomerDTO;
 import br.com.fiap.tech.challenge.adapter.repository.CustomerReaderRepository;
 import br.com.fiap.tech.challenge.driven.customer.client.CustomerClient;
-import br.com.fiap.tech.challenge.driven.customer.mapper.CustomerResponseMapper;
-import br.com.fiap.tech.challenge.enterprise.valueobject.Document;
+import br.com.fiap.tech.challenge.driven.customer.mapper.CustomerClientResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +14,14 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerReaderRepository {
 
     private final CustomerClient customerClient;
-    private final CustomerResponseMapper customerResponseMapper;
+    private final CustomerClientResponseMapper customerClientResponseMapper;
 
     @Override
-    public Optional<CustomerDTO> readByDocument(String documentValue) {
-        var document = Document.of(documentValue);
-
-        var response = customerClient.getByDocument(document.document());
+    public Optional<CustomerDTO> readByID(String id) {
+        var response = customerClient.getById(id);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            return Optional.of(customerResponseMapper.toDTO(response.getBody()));
+            return Optional.of(customerClientResponseMapper.toDTO(response.getBody()));
         }
 
         return Optional.empty();
