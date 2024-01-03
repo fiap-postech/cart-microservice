@@ -13,5 +13,5 @@ public class CreateCartDTO implements Serializable {
     private static final long serialVersionUID = 872840129927289117L;
 
     @NotBlank
-    private String customerDocument;
+    private String customerId;
 }
