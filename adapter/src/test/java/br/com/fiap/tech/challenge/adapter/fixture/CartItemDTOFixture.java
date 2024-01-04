@@ -16,9 +16,9 @@ public class CartItemDTOFixture {
         return Instancio.of(CartItemDTO.class)
                 .set(field(CartItemDTO::getProduct), create(createSandwichDTOModel()))
                 .set(field(CartItemDTO::getQuantity), 1)
-                .set(field(CartItemDTO::getTotal), BigDecimal.valueOf(5.00))
-                .set(field(CartItemDTO::getSubtotal), BigDecimal.valueOf(5.00))
-                .set(field(CartItemDTO::getDiscount), BigDecimal.valueOf(0.00))
+                .set(field(CartItemDTO::getTotal), new BigDecimal("5.00"))
+                .set(field(CartItemDTO::getSubtotal), new BigDecimal ("5.00"))
+                .set(field(CartItemDTO::getDiscount), new BigDecimal ("0.00"))
                 .toModel();
     }
 }

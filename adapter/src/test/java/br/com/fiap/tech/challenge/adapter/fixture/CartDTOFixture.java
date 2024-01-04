@@ -23,9 +23,9 @@ public class CartDTOFixture {
 
         return Instancio.of(CartDTO.class)
                 .set(field(CartDTO::getId), UUID_CART.toString())
-                .set(field(CartDTO::getTotal), BigDecimal.valueOf(5.00))
-                .set(field(CartDTO::getSubtotal), BigDecimal.valueOf(5.00))
-                .set(field(CartDTO::getDiscount), BigDecimal.valueOf(0.00))
+                .set(field(CartDTO::getTotal), new BigDecimal("5.00"))
+                .set(field(CartDTO::getSubtotal), new BigDecimal("5.00"))
+                .set(field(CartDTO::getDiscount), new BigDecimal("0.00"))
                 .set(field(CartDTO::getCustomer), create(enabledCustomerDTOModel()))
                 .set(field(CartDTO::getItems), items)
                 .toModel();

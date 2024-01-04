@@ -24,7 +24,7 @@ public abstract class ProductFixture {
                 .set(field(Sandwich::name), "Hamburguer Tripo X")
                 .set(field(Sandwich::description), "Um belo sanduíche")
                 .set(field(Sandwich::image), Image.of("http://localhost:8888/lanche.png"))
-                .set(field(Sandwich::price), Price.of(makeMoney(BigDecimal.valueOf(5.00))))
+                .set(field(Sandwich::price), Price.of(makeMoney(new BigDecimal ("5.00"))))
                 .set(field(Sandwich::enabled), Boolean.TRUE)
                 .toModel();
     }
