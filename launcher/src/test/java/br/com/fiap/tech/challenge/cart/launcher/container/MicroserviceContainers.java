@@ -10,17 +10,15 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.time.Duration;
 
-import static br.com.fiap.tech.challenge.cart.launcher.util.Databases.replaceDockerHost;
-
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MicroserviceContainers {
 
     public static GenericContainer<?> customerServiceContainer(Network network, MySQLContainer<?> database){
         return new GenericContainer<>(DockerImageName.parse("fiapsoat2grupo13/customer-service:latest"))
                 .withEnv("spring.profiles.active", "local")
-                .withEnv("spring.datasource.url", replaceDockerHost(database.getJdbcUrl()))
-                .withEnv("spring.datasource.username", database.getUsername())
-                .withEnv("spring.datasource.password", database.getPassword())
+                .withEnv("spring.datasource.url", "jdbc:mysql://host.docker.internal:33996/customer")
+                .withEnv("spring.datasource.username", "sys_customer")
+                .withEnv("spring.datasource.password", "sys_customer")
                 .withEnv("spring.jpa.open-in-view", "false")
                 .withNetwork(network)
                 .waitingFor(
@@ -34,9 +32,9 @@ public class MicroserviceContainers {
     public static GenericContainer<?> productServiceContainer(Network network, MySQLContainer<?> database){
         return new GenericContainer<>(DockerImageName.parse("fiapsoat2grupo13/product-service:latest"))
                 .withEnv("spring.profiles.active", "local")
-                .withEnv("spring.datasource.url", replaceDockerHost(database.getJdbcUrl()))
-                .withEnv("spring.datasource.username", database.getUsername())
-                .withEnv("spring.datasource.password", database.getPassword())
+                .withEnv("spring.datasource.url", "jdbc:mysql://host.docker.internal:33996/product")
+                .withEnv("spring.datasource.username", "sys_product")
+                .withEnv("spring.datasource.password", "sys_product")
                 .withEnv("spring.jpa.open-in-view", "false")
                 .withNetwork(network)
                 .waitingFor(

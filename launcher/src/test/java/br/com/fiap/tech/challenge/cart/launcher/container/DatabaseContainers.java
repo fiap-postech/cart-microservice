@@ -15,20 +15,13 @@ public class DatabaseContainers {
                 .withExposedPorts(6379);
     }
 
-    public static MySQLContainer<?> customerDatabaseContainer(Network network){
+    public static MySQLContainer<?> centralDatabaseContainer(Network network){
         return new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
                 .withNetwork(network)
-                .withDatabaseName("customer")
-                .withUsername("sys_customer")
-                .withPassword("sys_customer");
-    }
-
-    public static MySQLContainer<?> productDatabaseContainer(Network network){
-        return new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
-                .withNetwork(network)
-                .withDatabaseName("product")
-                .withUsername("sys_product")
-                .withPassword("sys_product");
+                .withCommand("--default-authentication-plugin=mysql_native_password")
+                .withUsername("root")
+                .withPassword("root")
+                .withInitScript("db/scripts/setup-database.sql");
     }
 
 }
