@@ -27,6 +27,9 @@ dependencies {
     testImplementation sharedLibs.instancio.junit
     testImplementation sharedLibs.instancio.core
     testImplementation sharedLibs.testcontainers.junit.jupiter
+    testImplementation sharedLibs.testcontainers.mysql
+    testImplementation sharedLibs.mysql.connector.j
+
 
     implementation project(":adapter")
     implementation project(":drivers:rest")
