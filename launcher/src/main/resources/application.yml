@@ -27,3 +27,9 @@ springdoc:
   swagger-ui:
     path: /doc
     url: /v3/api-docs.yaml
+
+aws:
+  region: us-east-1
+  local:
+    endpoint: http://localhost:4566
+    profiles: local,test

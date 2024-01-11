@@ -6,6 +6,7 @@ import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.ProductReaderGateway;
 import br.com.fiap.tech.challenge.application.usecase.cart.AddCartItemUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.CartUseCaseFactory;
+import br.com.fiap.tech.challenge.application.usecase.cart.CloseCartUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.CreateCartUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.FindCartByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.RemoveCartItemUseCase;
@@ -52,5 +53,10 @@ public class UseCaseConfiguration {
     @Bean
     public RemoveCartItemUseCase removeCartItemUseCase(CartReaderGateway useCase, CartWriterGateway presenter) {
         return CartUseCaseFactory.removeCartItemUseCase(useCase, presenter);
+    }
+
+    @Bean
+    public CloseCartUseCase closeCartService(CartReaderGateway reader, CartWriterGateway writer) {
+        return CartUseCaseFactory.closeCartService(reader, writer);
     }
 }

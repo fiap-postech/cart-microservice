@@ -5,9 +5,8 @@ plugins {
 version '1.0.0'
 
 dependencies {
-    compileOnly sharedLibs.jakarta.validation.api
     compileOnly sharedLibs.spring.context
-    compileOnly sharedLibs.spring.core
+    compileOnly 'io.awspring.cloud:spring-cloud-starter-aws-messaging:2.4.4'
 
     implementation project(":adapter")
 }

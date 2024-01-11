@@ -2,6 +2,7 @@ package br.com.fiap.tech.challenge.adapter.controller.cart;
 
 import br.com.fiap.tech.challenge.adapter.presenter.CartPresenter;
 import br.com.fiap.tech.challenge.application.usecase.cart.AddCartItemUseCase;
+import br.com.fiap.tech.challenge.application.usecase.cart.CloseCartUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.CreateCartUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.FindCartByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.RemoveCartItemUseCase;
@@ -30,6 +31,10 @@ public class CartControllerFactory {
 
     public static RemoveCartItemController removeCartItemController(RemoveCartItemUseCase useCase, CartPresenter presenter) {
         return new RemoveCartItemControllerImpl(useCase, presenter);
+    }
+
+    public static CloseCartController closeCartController(CloseCartUseCase useCase) {
+        return new CloseCartControllerImpl(useCase);
     }
 
 }
