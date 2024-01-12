@@ -2,7 +2,6 @@ package br.com.fiap.tech.challenge.rest.resource.response;
 
 import br.com.fiap.tech.challenge.rest.common.response.Response;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,6 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "Representação de um Carrinho")
-@Builder(toBuilder = true)
 public class CartResponse extends Response {
     @Serial
     private static final long serialVersionUID = 1464909268054662495L;
