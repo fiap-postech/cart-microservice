@@ -52,7 +52,7 @@ services:
 
   localstack:
     container_name: localstack
-    image: localstack/localstack
+    image: localstack/localstack:3.0.2
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
@@ -62,34 +62,35 @@ services:
       - AWS_ACCESS_KEY_ID=localstackAccessKeyId
       - AWS_SECRET_ACCESS_KEY=localstackSecretAccessKey
     volumes:
+      - ./docker/localstack/scripts:/docker-entrypoint-initaws.d
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - tech-challenge-network-local
 
-  localstack-resources:
-    container_name: localstack-resources
-    restart: "no"
-    image: amazon/aws-cli:2.11.0
-    depends_on:
-      localstack:
-        condition: service_healthy
-    environment:
-      - AWS_DEFAULT_REGION=us-east-1
-      - AWS_ACCESS_KEY_ID=localstackAccessKeyId
-      - AWS_SECRET_ACCESS_KEY=localstackSecretAccessKey
-    entrypoint: [ "sh", "-c" ]
-    command: [
-      "
-        aws --endpoint-url=http://localstack:4566 sns create-topic --name local-cart-microservice-close-cart-topic &&
-        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name local-payment-microservice-close-cart-queue &&
-        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name local-order-microservice-close-cart-queue &&
-        aws --endpoint-url=http://localstack:4566 sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:local-cart-microservice-close-cart-topic --protocol sqs --notification-endpoint arn:aws:sqs:us-east-1:000000000000:local-payment-microservice-close-cart-queue --attributes RawMessageDelivery=true &&
-        aws --endpoint-url=http://localstack:4566 sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:local-cart-microservice-close-cart-topic --protocol sqs --notification-endpoint arn:aws:sqs:us-east-1:000000000000:local-order-microservice-close-cart-queue --attributes RawMessageDelivery=true
-      "
-    ]
-    networks:
-      - tech-challenge-network-local
+#  localstack-resources:
+#    container_name: localstack-resources
+#    restart: "no"
+#    image: amazon/aws-cli:2.11.0
+#    depends_on:
+#      localstack:
+#        condition: service_healthy
+#    environment:
+#      - AWS_DEFAULT_REGION=us-east-1
+#      - AWS_ACCESS_KEY_ID=localstackAccessKeyId
+#      - AWS_SECRET_ACCESS_KEY=localstackSecretAccessKey
+#    entrypoint: [ "sh", "-c" ]
+#    command: [
+#      "
+#        aws --endpoint-url=http://localstack:4566 sns create-topic --name local-cart-microservice-close-cart-topic &&
+#        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name local-payment-microservice-close-cart-queue &&
+#        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name local-order-microservice-close-cart-queue &&
+#        aws --endpoint-url=http://localstack:4566 sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:local-cart-microservice-close-cart-topic --protocol sqs --notification-endpoint arn:aws:sqs:us-east-1:000000000000:local-payment-microservice-close-cart-queue --attributes RawMessageDelivery=true &&
+#        aws --endpoint-url=http://localstack:4566 sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:local-cart-microservice-close-cart-topic --protocol sqs --notification-endpoint arn:aws:sqs:us-east-1:000000000000:local-order-microservice-close-cart-queue --attributes RawMessageDelivery=true
+#      "
+#    ]
+#    networks:
+#      - tech-challenge-network-local
 
 networks:
   tech-challenge-network-local:
