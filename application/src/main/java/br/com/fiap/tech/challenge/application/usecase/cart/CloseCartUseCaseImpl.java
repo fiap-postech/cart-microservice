@@ -16,5 +16,6 @@ class CloseCartUseCaseImpl implements CloseCartUseCase {
     public void close(UUID cartUuid) {
         var cart = cartReaderGateway.readById(cartUuid);
         cartWriterGateway.close(cart);
+        cartWriterGateway.deleteById(cartUuid);
     }
 }

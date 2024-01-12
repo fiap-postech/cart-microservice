@@ -6,4 +6,5 @@ public interface CartWriterRepository {
 
     CartDTO write(CartDTO cart);
 
+    void deleteById(String id);
 }

@@ -7,6 +7,8 @@ import br.com.fiap.tech.challenge.application.gateway.CartWriterGateway;
 import br.com.fiap.tech.challenge.enterprise.entity.Cart;
 import lombok.RequiredArgsConstructor;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 class CartWriterGatewayImpl implements CartWriterGateway {
 
@@ -23,5 +25,10 @@ class CartWriterGatewayImpl implements CartWriterGateway {
     public void close(Cart cart) {
         var mapper = CartMapper.INSTANCE;
         closeCartRepository.close(mapper.toDTO(cart));
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        cartWriterRepository.deleteById(id.toString());
     }
 }
