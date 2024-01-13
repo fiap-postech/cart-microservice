@@ -16,7 +16,7 @@ import org.testcontainers.containers.MockServerContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static br.com.fiap.tech.challenge.customer.launcher.Expectations.GetCustomerExpectations.getCustomerSuccessExpectation;
+import static br.com.fiap.tech.challenge.customer.launcher.expectations.GetCustomerExpectations.getCustomerSuccessExpectation;
 import static br.com.fiap.tech.challenge.customer.launcher.containers.CacheContainers.localRedisContainer;
 import static br.com.fiap.tech.challenge.customer.launcher.containers.MockServerContainers.createMockServerContainer;
 import static br.com.fiap.tech.challenge.customer.launcher.fixture.CreateCartRequestFixture.createCartRequestModel;

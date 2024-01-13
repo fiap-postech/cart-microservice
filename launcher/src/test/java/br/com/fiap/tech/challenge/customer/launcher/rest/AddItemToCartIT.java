@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge.customer.launcher.rest;
 
-import br.com.fiap.tech.challenge.customer.launcher.Expectations.GetProductExpectations;
+import br.com.fiap.tech.challenge.customer.launcher.expectations.GetProductExpectations;
 import br.com.fiap.tech.challenge.customer.launcher.config.TestConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import org.testcontainers.containers.MockServerContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static br.com.fiap.tech.challenge.customer.launcher.Expectations.GetCustomerExpectations.getCustomerSuccessExpectation;
+import static br.com.fiap.tech.challenge.customer.launcher.expectations.GetCustomerExpectations.getCustomerSuccessExpectation;
 import static br.com.fiap.tech.challenge.customer.launcher.containers.CacheContainers.localRedisContainer;
 import static br.com.fiap.tech.challenge.customer.launcher.containers.MockServerContainers.createMockServerContainer;
 import static br.com.fiap.tech.challenge.customer.launcher.fixture.AddCartItemRequestFixture.addOneBeverageModel;
