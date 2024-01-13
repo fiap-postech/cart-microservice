@@ -44,6 +44,11 @@ services:
     restart: always
     ports:
       - "8888:8080"
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost/monitor/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/nginx/static:/tech-challenge/static
@@ -56,6 +61,11 @@ services:
     platform: linux/amd64
     ports:
       - "8689:8080"
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost/monitor/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       "spring.profiles.active": "prod"
       "db.host": "mysql"
