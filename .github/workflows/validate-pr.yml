@@ -34,15 +34,11 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: localstackAccessKeyId
-          aws-secret-access-key: localstackSecretAccessKey
-          aws-region: us-east-1
-
       - name: Build and analyze
         env:
+          AWS_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: localstackAccessKeyId
+          AWS_SECRET_ACCESS_KEY: localstackSecretAccessKey
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build jacocoTestReport sonar --info
