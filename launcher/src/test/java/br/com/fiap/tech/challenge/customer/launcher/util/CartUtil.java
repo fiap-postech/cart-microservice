@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge.customer.launcher.util;
 
+import br.com.fiap.tech.challenge.rest.resource.request.AddCartItemRequest;
 import br.com.fiap.tech.challenge.rest.resource.request.CreateCartRequest;
 import br.com.fiap.tech.challenge.rest.resource.response.CartResponse;
 import lombok.AccessLevel;
@@ -29,6 +30,26 @@ public class CartUtil {
             var response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
             assertThat(response.statusCode()).isEqualTo(201);
+
+            return fromJsonString(response.body(), CartResponse.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static CartResponse addItemToCart(String cartId, AddCartItemRequest addCartItemRequest) {
+        try {
+            var uri = String.format("http://localhost:8690/cart/%s/items", cartId);
+
+            var request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))
+                    .headers("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                    .POST(HttpRequest.BodyPublishers.ofString(asJsonString(addCartItemRequest)))
+                    .build();
+
+            var response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+            assertThat(response.statusCode()).isEqualTo(200);
 
             return fromJsonString(response.body(), CartResponse.class);
         } catch (Exception e) {
