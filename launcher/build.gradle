@@ -13,7 +13,7 @@ dependencies {
     implementation sharedLibs.spring.boot.starter.validation
     implementation sharedLibs.spring.boot.starter.logging
     implementation sharedLibs.spring.boot.starter.data.redis
-
+    implementation "io.awspring.cloud:spring-cloud-starter-aws-messaging:2.4.4"
 
     implementation sharedLibs.springdoc.openapi.starter.webmvc.ui
 
@@ -27,6 +27,9 @@ dependencies {
     testImplementation sharedLibs.instancio.junit
     testImplementation sharedLibs.instancio.core
     testImplementation sharedLibs.testcontainers.junit.jupiter
+    testImplementation 'org.testcontainers:mockserver:1.19.3'
+    testImplementation 'org.mock-server:mockserver-client-java:5.15.0'
+
 
     implementation project(":adapter")
     implementation project(":drivers:rest")

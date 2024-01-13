@@ -2,12 +2,14 @@ package br.com.fiap.tech.challenge.launcher.configuration;
 
 import br.com.fiap.tech.challenge.adapter.controller.cart.AddCartItemController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.CartControllerFactory;
+import br.com.fiap.tech.challenge.adapter.controller.cart.CloseCartController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.CreateCartController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.FindCartByUUIDController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.RemoveCartItemController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.UpdateCartItemController;
 import br.com.fiap.tech.challenge.adapter.presenter.CartPresenter;
 import br.com.fiap.tech.challenge.application.usecase.cart.AddCartItemUseCase;
+import br.com.fiap.tech.challenge.application.usecase.cart.CloseCartUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.CreateCartUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.FindCartByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.cart.RemoveCartItemUseCase;
@@ -41,5 +43,10 @@ public class ControllerConfiguration {
     @Bean
     public RemoveCartItemController removeCartItemController(RemoveCartItemUseCase useCase, CartPresenter presenter) {
         return CartControllerFactory.removeCartItemController(useCase, presenter);
+    }
+
+    @Bean
+    public CloseCartController closeCartController(CloseCartUseCase useCase) {
+        return CartControllerFactory.closeCartController(useCase);
     }
 }

@@ -29,4 +29,9 @@ public class RedisCartEntityRepositoryImpl implements CartReaderRepository, Cart
     public CartDTO write(CartDTO cart) {
         return mapper.toDTO(repository.save(mapper.toEntity(cart)));
     }
+
+    @Override
+    public void deleteById(String id) {
+        repository.deleteById(id);
+    }
 }

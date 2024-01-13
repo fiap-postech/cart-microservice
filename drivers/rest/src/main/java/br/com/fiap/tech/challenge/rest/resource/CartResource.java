@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge.rest.resource;
 
 import br.com.fiap.tech.challenge.adapter.controller.cart.AddCartItemController;
+import br.com.fiap.tech.challenge.adapter.controller.cart.CloseCartController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.CreateCartController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.FindCartByUUIDController;
 import br.com.fiap.tech.challenge.adapter.controller.cart.RemoveCartItemController;
@@ -41,7 +42,7 @@ public class CartResource implements CartResourceDoc {
     private final AddCartItemController addCartItemController;
     private final UpdateCartItemController updateCartItemController;
     private final RemoveCartItemController removeCartItemController;
-
+    private final CloseCartController closeCartController;
 
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
@@ -77,5 +78,11 @@ public class CartResource implements CartResourceDoc {
         return cartResponseMapper.toResponse(
                 removeCartItemController.remove(cartId, manageCartItemMapper.toDTO(request))
         );
+    }
+
+    @PostMapping("{cartId}/close")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void close(@PathVariable("cartId") String cartId) {
+        closeCartController.close(cartId);
     }
 }
