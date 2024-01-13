@@ -50,19 +50,51 @@ services:
     networks:
       - tech-challenge-network-local
 
+  customer:
+    container_name: customer
+    image: fiapsoat2grupo13/customer-service:latest
+    platform: linux/amd64
+    ports:
+      - "8689:8080"
+    environment:
+      "spring.profiles.active": "prod"
+      "db.host": "mysql"
+      "db.username": "sys_customer"
+      "db.password": "customer_6#233zJMNTjkQb#sgps#"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - tech-challenge-network-local
+
+  product:
+    container_name: product
+    image: fiapsoat2grupo13/product-service:latest
+    platform: linux/amd64
+    ports:
+      - "8688:8080"
+    environment:
+      "spring.profiles.active": "prod"
+      "db.host": "mysql"
+      "db.username": "sys_product"
+      "db.password": "product_6#233zJMNTjkQb#sgps#"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - tech-challenge-network-local
+
   localstack:
     container_name: localstack
-    image: localstack/localstack:3.0.2
+    image: fiapsoat2grupo13/localstack-resources:latest
+    platform: linux/amd64
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
     environment:
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${DEBUG:-0}
-      - AWS_ACCESS_KEY_ID=localstackAccessKeyId
-      - AWS_SECRET_ACCESS_KEY=localstackSecretAccessKey
     volumes:
-      - ./docker/localstack/scripts:/etc/localstack/init/ready.d
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
