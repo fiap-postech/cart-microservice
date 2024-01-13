@@ -2,9 +2,11 @@ package br.com.fiap.tech.challenge.customer.launcher.rest;
 
 import br.com.fiap.tech.challenge.customer.launcher.config.TestConfiguration;
 import br.com.fiap.tech.challenge.customer.launcher.expectations.GetProductExpectations;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
+import org.slf4j.Logger;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +16,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MockServerContainer;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -32,6 +35,7 @@ import static br.com.fiap.tech.challenge.customer.launcher.util.ConfigurationOve
 import static io.restassured.RestAssured.given;
 import static java.util.Objects.isNull;
 import static org.mockserver.verify.VerificationTimes.exactly;
+import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS;
 
 @SpringBootTest(
@@ -42,6 +46,8 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 @DirtiesContext(classMode = AFTER_CLASS)
 @Testcontainers
 class CloseCartIT {
+
+    private static final Logger LOGGER = getLogger(CloseCartIT.class);
 
     @Container
     protected static MockServerContainer MOCK_SERVER_CONTAINER = createMockServerContainer();
@@ -57,6 +63,11 @@ class CloseCartIT {
     @DynamicPropertySource
     static void overrideConfig(DynamicPropertyRegistry registry) {
         overrideConfiguration(registry, MOCK_SERVER_CONTAINER.getEndpoint(), REDIS_CONTAINER.getHost());
+    }
+
+    @BeforeAll
+    static void setup(){
+        LOCAL_STACK_CONTAINER.followOutput(new Slf4jLogConsumer(LOGGER));
     }
 
     @BeforeEach
