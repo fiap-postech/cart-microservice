@@ -31,5 +31,5 @@ springdoc:
 aws:
   region: us-east-1
   local:
-    endpoint: http://host.docker.internal:4566
+    endpoint: http://localhost:4566
     profiles: local,test
