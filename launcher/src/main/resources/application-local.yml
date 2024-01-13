@@ -8,4 +8,4 @@ aws:
   region: us-east-1
   sns:
     close-cart:
-      name: local-cart-microservice-close-cart-topic
+      name: local-cart-closed-topic
