@@ -240,6 +240,7 @@ gradle-app.setting
 
 docker/mysql/data
 infra/docker/mysql/data
+infra/volume
 infra/kubernetes/mysql/data
 infra/kubernetes/script/package-lock.json
 infra/kubernetes/script/package.json

@@ -8,3 +8,9 @@ db:
 spring.data.redis:
   host: redis
   port: 6379
+
+aws:
+  region: us-east-1
+  sns:
+    close-cart:
+      name: prd-cart-microservice-close-cart-topic
