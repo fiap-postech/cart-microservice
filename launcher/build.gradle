@@ -1,10 +1,11 @@
 plugins {
-    id 'org.springframework.boot' version '3.2.1'
-    id "org.flywaydb.flyway" version "9.16.3"
-    id 'io.spring.dependency-management' version '1.1.4'
+    id "jacoco"
+    alias(sharedLibs.plugins.spring.boot.plugin)
+    alias(sharedLibs.plugins.flyway.plugin)
+    alias(sharedLibs.plugins.spring.dependency.management.plugin)
+    id "org.sonarqube" version "4.4.1.3373"
+    id 'pl.allegro.tech.build.axion-release' version '1.16.1'
 }
-
-version '1.0.0'
 
 dependencies {
     implementation sharedLibs.spring.boot.starter.web
@@ -39,21 +40,55 @@ dependencies {
     implementation project(":drivers:cart-producer")
 }
 
+scmVersion {
+    repository {
+        type = "git"
+        remote = "origin"
+    }
+
+    versionIncrementer 'incrementPatch'
+    branchVersionIncrementer = [
+            'hotfix/.*': 'incrementPatch',
+            'feature/.*': 'incrementMinor',
+    ]
+}
+
 java {
     processResources {
         expand(project.properties)
     }
 }
 
+bootJar {
+    archiveFileName = "cart-service.jar"
+}
+
 springBoot {
     buildInfo {
         properties {
-            name = 'tech challenge api'
+            name = 'Tech Challenge - Cart API'
             additional = [
                     "description": project?.description ?= "",
-                    "version"    : project.version
+                    "version"    : scmVersion.version
             ]
         }
+    }
+}
+
+version = scmVersion.version
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+sonarqube {
+    properties {
+        property 'sonar.gradle.skipCompile', 'true'
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.organization', 'fiap-postech'
+        property 'sonar.projectKey', 'fiap-postech_cart-microservice'
     }
 }
 
