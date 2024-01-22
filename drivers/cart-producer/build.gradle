@@ -6,7 +6,8 @@ version '1.0.0'
 
 dependencies {
     compileOnly sharedLibs.spring.context
-    compileOnly 'io.awspring.cloud:spring-cloud-starter-aws-messaging:2.4.4'
+    api platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.1.0")
+    api 'io.awspring.cloud:spring-cloud-aws-starter-sns'
 
     implementation project(":adapter")
 }
