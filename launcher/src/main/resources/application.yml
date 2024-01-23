@@ -8,6 +8,10 @@ spring:
       host: localhost
       port: 6380
       time-to-live: 3600000
+  cloud:
+    aws:
+      region:
+        static: us-east-1
 
 server.port: 8080
 
@@ -27,9 +31,3 @@ springdoc:
   swagger-ui:
     path: /doc
     url: /v3/api-docs.yaml
-
-aws:
-  region: us-east-1
-  local:
-    endpoint: http://localhost:4566
-    profiles: local,test
