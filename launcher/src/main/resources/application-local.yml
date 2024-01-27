@@ -4,8 +4,12 @@ server:
 product.host: http://localhost:8688
 customer.host: http://localhost:8689
 
+spring:
+  cloud:
+    aws:
+      endpoint: http://localhost:4566
+
 aws:
-  region: us-east-1
   sns:
     close-cart:
       name: local-cart-closed-topic
